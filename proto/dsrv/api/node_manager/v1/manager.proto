@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+package pilot.manager;
+option go_package = "github.com/xellos00/node-manager-api/proto/pilot/manager";
+
+
+service NodeManager {
+
+    rpc Init(InitRequest) returns (InitResponse) {
+    }
+
+    rpc Verify(VerifyRequest) returns (VerifyInfo) {
+    }
+
+    rpc End(EndRequest) returns (EndResponse) {
+    }
+
+    rpc Execute(ExecuteRequest) returns (ExecuteResponse) {
+    }
+
+    rpc UpdateConfig(UpdateRequest) returns (UpdateResponse) {
+    }
+}
+
+
+enum CommandStatus {
+    SUCCESS = 0;
+    FAIL = 1;
+}
+
+message InitRequest {
+    // is_required: true
+    google.protobuf.Struct options = 1;
+}
+
+message InitResponse {
+    CommandStatus result = 1;
+    google.protobuf.Struct metadata =2;
+}
+
+message VerifyRequest {
+    // is_required: true
+    google.protobuf.Struct options = 1;
+}
+
+message VerifyInfo {
+    CommandStatus result = 1;
+}
+
+message EndRequest {
+    google.protobuf.Struct metadata =1;
+}
+
+message EndResponse {
+    CommandStatus result = 1;
+}
+
+message ExecuteRequest {
+    // is_required: true
+    google.protobuf.Struct target_info = 1;
+    // is_required: true
+    google.protobuf.Struct command = 2;
+}
+
+
+message ExecuteResponse {
+    enum State {
+        NONE = 0;
+        PENDING = 1;
+        INPROGRESS = 2;
+        SUCCESS = 3;
+        FAILURE = 4;
+        TIMEOUT = 5;
+    }
+    State state = 1;
+    string message = 2;
+    string protocol = 3;
+    google.protobuf.Struct options = 4;
+}
+
+
+message UpdateRequest {
+}
+
+message UpdateResponse {
+}
