@@ -1,0 +1,18 @@
+from setuptools import setup, find_packages
+
+with open('../../VERSION', 'r') as f: 
+    VERSION = f.read().strip()
+    f.close()
+
+setup(
+    name='dsrv-validator-api',
+    version=VERSION,
+    description='DSRV API Protobuf',
+    long_description='DSRV Validator Proj API Protobuf',
+    url='https://www.dsrvlabs.com/',
+    author='DSRV Labs Validator Team',
+    author_email='contact@dsrvlabs.com',
+    license='Apache Software License',
+    packages=find_packages(),
+    zip_safe=False,
+)

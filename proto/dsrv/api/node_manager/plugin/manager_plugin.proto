@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
+
+package pilot.plugin;
+option go_package = "github.com/xellos00/node-manager-api/proto/pilot/plugin";
+
+
+service ManagerPlugin {
+    rpc init (google.protobuf.Empty) returns (PluginInfo) {}
+    rpc verify (google.protobuf.Empty) returns (VerifyInfo) {}
+    rpc execute (ExecuteRequest) returns (ExecuteResponse) {}
+}
+
+message ExecuteRequest {
+    // is_required: true
+    google.protobuf.Struct execute_info = 1;
+    // is_required: true
+    google.protobuf.Struct options = 2;
+}
+
+
+message ExecuteResponse {
+    enum State {
+        NONE = 0;
+        PENDING = 1;
+        INPROGRESS = 2;
+        SUCCESS = 3;
+        FAILURE = 4;
+        TIMEOUT = 5;
+    }
+    State state = 1;
+    string message = 2;
+    string resource_type = 3;
+}
+
+message CollectorVerifyInfo {
+    google.protobuf.Struct options = 1;
+}
+
+message PluginInfo {
+    google.protobuf.Struct metadata = 1;
+}
+
+message VerifyInfo {
+    string verify_msg = 1;
+}
