@@ -1,5 +1,0 @@
-python3
-python3-pip
-golang-go
-git
-unzip
