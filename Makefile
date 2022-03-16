@@ -5,7 +5,6 @@ DOCKER_NAME = dsrv/api_builder
 .PHONY: help
 .PHONY: all python json
 .PHONY: clean
-
 define banner
 	@echo "========================================================================"
 	@echo " $(1)"
@@ -28,32 +27,17 @@ endef
 
 help:
 	@echo "Make Options:"
-	@echo " all                 - Generate all : ${TARGET}"
 	@echo " go                  - Generate all : ${TARGET}"
-	@echo " python              - Generate python protobuf"
-	@echo " json                - Generate API artifact json files"
 	@echo " clean               - Clean up dist directory"
 
-all:
-	$(call banner, "Generate all : ${TARGET}")
-	$(call build, "all")
-
 go:
+	rm -rf dist
 	mkdir dist
 	protoc -I=. \
 	    --go_out dist/ --go_opt paths=source_relative \
-	    --go-grpc_out dist/ --go-grpc_opt paths=source_relative \
-		proto/**/**/**/**/*.proto
-
-json:
-	$(call banner, "Generate API json files")
-	$(call build, "json")
-
-python:
-	$(call banner, "Generate python protobuf")
-	$(call build, "python")
+	    --go-grpc_out / --go-grpc_opt paths=source_relative \
+		proto/**/**/**/*.proto
 
 clean:
 	$(call banner, "Clean up dist directory")
-	sudo rm -rf dist
-	sudo rm -rf artifact
+	rm -rf dist
