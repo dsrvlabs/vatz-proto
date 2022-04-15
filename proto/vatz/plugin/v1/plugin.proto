@@ -18,19 +18,12 @@ message ExecuteRequest {
     google.protobuf.Struct options = 2;
 }
 
-//성공 예제 => CPU 파싱은
-//{
-//  'state': SUCCESS,
-//  'message': "90%",
-//  'severity': `CRITICAL`
-//  'resource_type': "discord"
-//}
 enum ALERT_TYPE {
     DISCORD = 0;
     PAGER_DUTY = 1;
 }
 
-enum State {
+enum STATE {
     NONE = 0;
     PENDING = 1;
     IN_PROGRESS = 2;
@@ -39,7 +32,7 @@ enum State {
     TIMEOUT = 5;
 }
 
-enum Severity {
+enum SEVERITY {
     UNKNOWN = 0;
     WARNING = 1;
     ERROR = 2;
@@ -48,13 +41,12 @@ enum Severity {
 }
 
 message ExecuteResponse {
-
-    State state = 1;
+    STATE state = 1;
     string message = 2;
-    ALERT_TYPE alert_type = 3;
-    Severity severity = 4;
+    repeated ALERT_TYPE alert_type = 3;
+    SEVERITY severity = 4;
+    string resource_type = 5;
 }
-
 
 message CollectorVerifyInfo {
     google.protobuf.Struct options = 1;
