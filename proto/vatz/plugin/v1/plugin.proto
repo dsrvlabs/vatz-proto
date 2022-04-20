@@ -4,7 +4,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 
 package vatz.plugin;
-option go_package = "github.com/xellos00//dk-yuba-proto/proto/vatz/plugin/v1";
+option go_package = "plugin/v1";
 
 service Plugin {
     rpc verify (google.protobuf.Empty) returns (VerifyInfo) {}

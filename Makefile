@@ -4,11 +4,9 @@ help:
 	@echo " clean               - Clean up dist directory"
 
 go:
-	rm -rf dist
-	mkdir dist
 	protoc -I=. \
-	    --go_out dist/ --go_opt paths=source_relative \
-	    --go-grpc_out dist/ --go-grpc_opt paths=source_relative \
+	    --go_out ./ --go_opt paths=import \
+	    --go-grpc_out ./ --go-grpc_opt paths=import \
 		proto/**/**/**/*.proto
 
 clean:

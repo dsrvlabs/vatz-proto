@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/struct.proto";
 
 package vatz.manager;
-option go_package = "github.com/xellos00/dk-yuba-proto/proto/vatz/manager/v1";
+option go_package = "manager/v1";
 
 service Manager {
     rpc Init(InitRequest) returns (InitResponse) {}
