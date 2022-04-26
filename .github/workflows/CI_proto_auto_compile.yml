@@ -1,0 +1,43 @@
+name: Vatz Poro-buffer auto compile
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'proto/vatz/**/**/**'
+jobs:
+  autogen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v1
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.18
+      - name: Install Protobuf Generator
+        run: |
+          PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
+          curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/$PROTOC_ZIP
+          sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
+          sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
+          sudo ln -sfn /usr/local/bin/protoc /usr/bin/protoc
+          curl -OL https://github.com/protocolbuffers/protobuf-go/releases/download/v1.27.1/protoc-gen-go.v1.27.1.linux.amd64.tar.gz
+          tar -xvf protoc-gen-go.v1.27.1.linux.amd64.tar.gz
+          sudo mv protoc-gen-go /usr/bin/protoc-gen-go
+          curl -OL https://github.com/jsirianni/grpc-go/releases/download/v1.39.1-js/protoc-gen-go-grpc
+          sudo chmod +x protoc-gen-go-grpc && sudo mv protoc-gen-go-grpc /usr/bin/protoc-gen-go-grpc
+      - name: Install Protoc
+        run: |
+          make compile
+      - name: Commit files
+        run: |
+          git config --local user.name "xellos00"
+          git add ./
+          git commit -m "compile and update with compiled pb.go(s)"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.VATZ_PROTO_COMPILE_TOKEN }}
+          force: true
