@@ -17,6 +17,7 @@ message ExecuteRequest {
 }
 
 enum ALERT_TYPE {
+
     DISCORD = 0;
     PAGER_DUTY = 1;
 }
