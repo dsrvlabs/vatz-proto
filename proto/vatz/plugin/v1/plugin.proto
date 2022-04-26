@@ -12,9 +12,7 @@ service Plugin {
 }
 
 message ExecuteRequest {
-    // is_required: true
     google.protobuf.Struct execute_info = 1;
-    // is_required: true
     google.protobuf.Struct options = 2;
 }
 
