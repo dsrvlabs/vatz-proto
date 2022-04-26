@@ -7,8 +7,10 @@ package vatz.plugin;
 option go_package = "plugin/v1";
 
 service Plugin {
+
     rpc verify (google.protobuf.Empty) returns (VerifyInfo) {}
     rpc execute (ExecuteRequest) returns (ExecuteResponse) {}
+
 }
 
 message ExecuteRequest {
