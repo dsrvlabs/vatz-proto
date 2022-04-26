@@ -28,6 +28,8 @@ jobs:
           sudo mv protoc-gen-go /usr/bin/protoc-gen-go
           curl -OL https://github.com/jsirianni/grpc-go/releases/download/v1.39.1-js/protoc-gen-go-grpc
           sudo chmod +x protoc-gen-go-grpc && sudo mv protoc-gen-go-grpc /usr/bin/protoc-gen-go-grpc
+          rm -rf protoc-gen-go.v1.27.1.linux.amd64.tar.gz
+          rm -rf protoc-3.14.0-linux-x86_64.zip
       - name: Install Protoc
         run: |
           make compile
