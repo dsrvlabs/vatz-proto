@@ -186,8 +186,10 @@ type ExecuteRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	//is_required: True
 	ExecuteInfo *structpb.Struct `protobuf:"bytes,1,opt,name=execute_info,json=executeInfo,proto3" json:"execute_info,omitempty"`
-	Options     *structpb.Struct `protobuf:"bytes,2,opt,name=options,proto3" json:"options,omitempty"`
+	//is_required: True
+	Options *structpb.Struct `protobuf:"bytes,2,opt,name=options,proto3" json:"options,omitempty"`
 }
 
 func (x *ExecuteRequest) Reset() {
