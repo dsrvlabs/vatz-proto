@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN }}
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
@@ -35,13 +37,13 @@ jobs:
       - name: Install Protoc
         run: |
           make compile
-      - name: Commit files
-        run: |
-          git config --local user.name "xellos00"
-          git add ./
-          git commit -m "compile and update with compiled pb.go(s)"
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: 'compile and update with compiled pb.go(s)'
+          add: '*'
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.VATZ_PROTO_COMPILE_TOKEN }}
           force: true
