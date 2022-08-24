@@ -46,3 +46,10 @@ $ export GOPRIVATE=github.com/hqueue/vatz-secret
 $ env GIT_SSH_COMMAND="ssh -o ControlMaster=no -o BatchMode=no" go get github.com/hqueue/vatz-secret
 $ make
 ```
+
+## Submodule
+TBD
+
+grpc-gateway.
+googleapis by submodule.
+

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+
+
+package vatz.rpc;
+option go_package = "rpc/v1";
+
+enum Status {
+    OK = 0;
+    FAIL = 1;
+}
+
+message PluginStatusResponse {
+    Status status = 1;
+    repeated PluginStatus plugin_status = 2;
+}
+
+message PluginStatus {
+    Status status = 1;
+    string plugin_name = 2;
+}
+
+service VatzRPC {
+    rpc PluginStatus(google.protobuf.Empty) returns (PluginStatusResponse) {
+        option (google.api.http) = {
+            get: "/v1/plugin_status"
+        };
+    }
+}

@@ -14,7 +14,7 @@ init:
 	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
 build:
-	protoc -I=. \
+	@protoc -I=. -I=./googleapis \
 	    --go_out ./ --go_opt paths=import \
 	    --go-grpc_out ./ --go-grpc_opt paths=import \
 		proto/**/**/**/*.proto
