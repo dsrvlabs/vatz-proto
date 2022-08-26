@@ -3,27 +3,30 @@
 
 ### Here's simple path 
 ```
-.
-├── LICENSE
-├── Makefile
-├── README.md
 ├── manager
 │   └── v1
-│       ├── manager.pb.go
-│       └── manager_grpc.pb.go
+│       ├── manager_grpc.pb.go
+│       └── manager.pb.go
 ├── plugin
 │   └── v1
-│       ├── plugin.pb.go
-│       └── plugin_grpc.pb.go
-└── proto
-    └── vatz
-        ├── manager
-        │   └── v1
-        │       └── manager.proto
-        └── plugin
-            └── v1
-                └── plugin.proto
-
+│       ├── plugin_grpc.pb.go
+│       └── plugin.pb.go
+├── proto
+│   └── vatz
+│       ├── manager
+│       │   └── v1
+│       │       └── manager.proto
+│       ├── plugin
+│       │   └── v1
+│       │       └── plugin.proto
+│       └── rpc
+│           └── v1
+│               └── rpc.proto
+├── README.md
+└── rpc
+    └── v1
+            ├── rpc_grpc.pb.go
+                    └── rpc.pb.go
 ```
 
 All proto files go to under path proto folder and 
@@ -48,8 +51,5 @@ $ make
 ```
 
 ## Submodule
-TBD
 
-grpc-gateway.
-googleapis by submodule.
-
+To enable `google.api.http` option, `gprc-gateway` repo is added by submodule.
