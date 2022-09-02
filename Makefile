@@ -18,6 +18,10 @@ build:
 	    --go_out ./ --go_opt paths=import \
 	    --go-grpc_out ./ --go-grpc_opt paths=import \
 		proto/**/**/**/*.proto
+gateway:
+	@protoc -I=. -I=./googleapis \
+		--grpc-gateway_out ./ \
+		proto/vatz/**/**/*.proto
 
 compile:
 	sudo protoc -I=. \
