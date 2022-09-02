@@ -53,3 +53,11 @@ $ make
 ## Submodule
 
 To enable `google.api.http` option, `gprc-gateway` repo is added by submodule.
+
+## Build
+
+```
+~$ go mod tidy
+~$ make all
+~$ make gateway
+```
