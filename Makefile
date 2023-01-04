@@ -24,7 +24,7 @@ gateway:
 		proto/vatz/**/**/*.proto
 
 compile:
-	sudo protoc -I=. \
+	sudo protoc -I=. -I=./googleapis \
           --go_out ./ --go_opt paths=import \
           --go-grpc_out ./ --go-grpc_opt paths=import \
         proto/**/**/**/*.proto
