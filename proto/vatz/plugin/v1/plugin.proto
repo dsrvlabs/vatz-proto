@@ -44,7 +44,6 @@ enum SEVERITY {
 message ExecuteResponse {
     STATE state = 1;
     string message = 2;
-    repeated ALERT_TYPE alert_type = 3;
     SEVERITY severity = 4;
     string resource_type = 5;
 }
