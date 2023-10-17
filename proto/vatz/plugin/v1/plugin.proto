@@ -21,7 +21,6 @@ message ExecuteRequest {
 enum ALERT_TYPE {
     DISCORD = 0;
     PAGER_DUTY = 1;
-    TELEGRAM = 3;
 }
 
 enum STATE {
