@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package vatz.manager.v2;
+
+option go_package = "manager/v2";
+
+import "google/api/annotations.proto";
+import "google/protobuf/any.proto";
+
+
+message FieldSpec {
+    string name = 1;
+    string type = 2;
+    string value = 3;
+}
+
+message UserRequest {
+    string plugin = 1;
+    string method = 2;
+    repeated FieldSpec fields = 3;
+}
+
+message UserResponse {
+    string plugin = 1;
+    string method = 2;
+    google.protobuf.Any result = 3;
+    string str_result = 4;
+}
+
+service RequestHandler {
+    rpc SendRequest(UserRequest) returns (UserResponse) {
+        option (google.api.http) = {
+            post: "/v2/send"
+            body: "*"
+        };
+    }
+}

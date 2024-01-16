@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package vatz.manager.v2;
+
+option go_package = "manager/v2";
+
+import "google/api/annotations.proto";
+
+message ListPluginRequest {
+// TODO: Add filter scheme
+}
+
+message PluginMetadata {
+    string name = 1;
+}
+
+message ListPluginResponse {
+    repeated PluginMetadata plugin = 1;
+}
+
+message PluginMethod {
+    string name = 1;
+    repeated MethodFieldSpec spec = 2;
+}
+
+// FIXME: Duplicated to handler's.
+message MethodFieldSpec {
+    string name = 1;
+    string type = 2;
+}
+
+message DetailPluginRequest {
+    string plugin_name = 1;
+}
+
+message DetailPluginResponse {
+    string plugin_name = 1;
+    repeated PluginMethod methods = 2;
+}
+
+service EndpointService {
+    rpc ListPlugin(ListPluginRequest) returns (ListPluginResponse) {
+        option (google.api.http) = {
+            get: "/v2/plugin/list"
+        };
+    }
+
+    rpc DetailPlugin(DetailPluginRequest) returns (DetailPluginResponse) {
+        option (google.api.http) = {
+            get: "/v2/plugin/detail/{plugin_name}"
+        };
+    }
+}
